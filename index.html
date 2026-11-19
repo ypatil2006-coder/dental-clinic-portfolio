@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
+<noscript><style>.loader{display:none}</style></noscript>
 <style>
 :root{
   --ink:#0d0607; --ink-2:#180a0c; --red:#ff2b1a; --red-deep:#c2170c;
@@ -47,6 +48,7 @@ input,textarea{caret-color:var(--red)}
 .top__link::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:100%;transition:transform .45s var(--ease-under)}
 .top__link:hover::after,.top__link:focus-visible::after{transform:scaleX(1);transform-origin:0}
 .top__cta{display:inline-flex;align-items:center;gap:8px;border:1px solid currentColor;border-radius:100px;padding:9px 16px;font-size:12px;font-weight:600;letter-spacing:.02em;transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease)}
+.top__cta svg,.float a svg{width:13px;height:13px;flex:none}
 .top__cta:hover{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
 .on-red .top__cta:hover{background:var(--ink);border-color:var(--ink)}
 
@@ -91,7 +93,7 @@ input,textarea{caret-color:var(--red)}
 .item:hover .item__frame img{transform:scale(1.075);filter:grayscale(1) brightness(.5) contrast(1.3)}
 .item:hover .item__frame::before{opacity:1}
 .item:hover .item__frame::after{opacity:1}
-.item__big{position:absolute;left:20px;right:20px;bottom:20px;z-index:2;font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,7.5vw,7rem);line-height:.82;letter-spacing:-.065em;text-transform:uppercase;transform:translateY(115%);transition:transform .65s var(--ease-out);pointer-events:none}
+.item__big{position:absolute;left:20px;right:20px;bottom:20px;z-index:2;font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,7.5vw,7rem);line-height:.82;letter-spacing:-.065em;text-transform:uppercase;transform:translateY(165%);transition:transform .65s var(--ease-out);pointer-events:none}
 .item:hover .item__big,.item:focus-within .item__big{transform:none}
 .item__cap{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:15px;border-top:1px solid rgba(243,232,226,.22);margin-top:14px}
 .item__cap strong{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-.02em}
@@ -204,7 +206,7 @@ input,textarea{caret-color:var(--red)}
     <a class="top__link" href="#about">About</a>
     <a class="top__link" href="#contact">Contact</a>
   </nav>
-  <a class="top__cta" href="https://wa.me/15551234567?text=Hello%2C%20I%27d%20like%20to%20book%20a%20dental%20appointment." target="_blank" rel="noopener">Book a visit <span aria-hidden="true">↗</span></a>
+  <a class="top__cta" href="https://wa.me/15551234567?text=Hello%2C%20I%27d%20like%20to%20book%20a%20dental%20appointment." target="_blank" rel="noopener">Book a visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
 </header>
 
 <main id="top">
@@ -268,7 +270,7 @@ input,textarea{caret-color:var(--red)}
     <h2 class="display"><span class="line"><span class="line__i">The person behind</span></span><span class="line"><span class="line__i" style="--d:110ms">the chair.</span></span></h2>
     <div class="about__body">
       <div class="about__copy reveal">
-        <img class="about__portrait" src="assets/pexels-4971556.jpg" alt="Placeholder portrait of a dental practitioner">
+        <img class="about__portrait" src="assets/pexels-17792882.jpg" alt="Placeholder portrait of a dental practitioner">
         <p>I'm Dr. Alex Mercer. I run a small practice on my own, which means the person you meet, listen to and trust is the person who does your work, every step of it.</p>
         <p>I trained in restorative and cosmetic dentistry, but the part of the job I care about most is slower: understanding what you actually want, explaining what's possible, and never recommending more than you need.</p>
         <p>No upsell, no theatre. Just careful work, good conversation, and the time to get it right.</p>
@@ -314,7 +316,7 @@ input,textarea{caret-color:var(--red)}
 
 <div class="float" id="float">
   <span>Ready when you are.</span>
-  <a href="https://wa.me/15551234567?text=Hello%2C%20I%27d%20like%20to%20book%20a%20dental%20appointment." target="_blank" rel="noopener">BOOK A VISIT ↗</a>
+  <a href="https://wa.me/15551234567?text=Hello%2C%20I%27d%20like%20to%20book%20a%20dental%20appointment." target="_blank" rel="noopener">BOOK A VISIT <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
 </div>
 
 <script>
@@ -357,9 +359,8 @@ input,textarea{caret-color:var(--red)}
   // Topbar colour follows the section underneath
   const themes = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      document.body.classList.toggle('on-light', e.target.classList.contains('about'));
-      document.body.classList.toggle('on-red', e.target.classList.contains('voice'));
+      if (e.target.classList.contains('about')) document.body.classList.toggle('on-light', e.isIntersecting);
+      if (e.target.classList.contains('voice')) document.body.classList.toggle('on-red', e.isIntersecting);
     });
   }, { rootMargin: '-8% 0px -88% 0px' });
   document.querySelectorAll('.about, .voice').forEach(s => themes.observe(s));
@@ -377,13 +378,16 @@ input,textarea{caret-color:var(--red)}
     const el = document.getElementById('typed');
     const words = ['smile.', 'visit.', 'teeth.'];
     let wi = 0, ci = 0, deleting = false;
-    setInterval(() => {
+    const step = () => {
       const w = words[wi];
       ci += deleting ? -1 : 1;
       el.textContent = w.slice(0, ci);
-      if (!deleting && ci === w.length) { deleting = true; return setTimeout(() => {}, 1400); }
-      if (deleting && ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
-    }, deleting ? 55 : 110);
+      let delay = deleting ? 55 : 110;
+      if (!deleting && ci === w.length) { deleting = true; delay = 1400; }
+      else if (deleting && ci === 0) { deleting = false; wi = (wi + 1) % words.length; delay = 320; }
+      setTimeout(step, delay);
+    };
+    setTimeout(step, 900);
   }
 })();
 </script>
